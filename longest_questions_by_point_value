@@ -1,0 +1,73 @@
+WITH qL AS (
+  SELECT
+    '10_points' AS Point_value,
+    LENGTH(Question_asked) + LENGTH(Question_interrupted) + LENGTH(Answer) AS Total_length
+  FROM `JBQ.10_points_initial`
+
+  UNION ALL
+
+  SELECT
+    '20_points' AS Point_value,
+    LENGTH(Question_asked) + LENGTH(Question_interrupted) + LENGTH(Answer) AS Total_length
+  FROM `JBQ.20_points_initial`
+  
+  UNION ALL
+
+  SELECT
+    '30_points' AS Point_value,
+    LENGTH(Question_asked) + LENGTH(Question_interrupted) + LENGTH(Answer) AS Total_length
+  FROM `JBQ.30_points_initial`
+)
+
+, qLm AS (
+  SELECT DISTINCT
+    qL.Point_value,
+    MAX(qL.Total_length) OVER (PARTITION BY qL.Point_value) AS Max_total_length
+  FROM qL
+)
+
+, qA AS (
+  SELECT
+    '10_points' AS Point_value,
+    Question_number,
+    Question_asked,
+    Question_interrupted,
+    Answer,
+    LENGTH(Question_asked) + LENGTH(Question_interrupted) + LENGTH(Answer) AS Total_length
+  FROM `JBQ.10_points_initial`
+
+  UNION ALL
+
+  SELECT
+    '20_points' AS Point_value,
+    Question_number,
+    Question_asked,
+    Question_interrupted,
+    Answer,
+    LENGTH(Question_asked) + LENGTH(Question_interrupted) + LENGTH(Answer) AS Total_length
+  FROM `JBQ.20_points_initial`
+
+  UNION ALL
+
+  SELECT
+    '30_points' AS Point_value,
+    Question_number,
+    Question_asked,
+    Question_interrupted,
+    Answer,
+    LENGTH(Question_asked) + LENGTH(Question_interrupted) + LENGTH(Answer) AS Total_length
+  FROM `JBQ.30_points_initial`
+)
+
+SELECT
+  qA.Point_value,
+  qA.Question_number,
+  qA.Question_asked,
+  qA.Question_interrupted,
+  qA.Answer,
+  qA.Total_length
+FROM qLm
+JOIN qA
+ON qLm.Point_value = qA.Point_value
+AND qLm.Max_total_length = qA.Total_length
+ORDER BY qA.Point_value;
