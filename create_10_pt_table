@@ -1,0 +1,25 @@
+CREATE TABLE `your_table.10_pts` AS
+SELECT
+  t1.Book_num,
+  t2.Qq_f2,
+  t2.Qq_wc,
+  t1.Qa_pre_brdg,
+  t4.Q_asked,
+  t4.QA_wrd_count,
+  t1.Qa_bridge,
+  t1.Qi,
+  t1.Qi_qab_wc,
+  t1.Ans_book,
+  t3.Book_name,
+  t1.Ans_ch,
+  t1.Ans_fvs,
+  t1.Answer,
+  t1.Ans_wc
+FROM
+  `your_table.10_pt_key` AS t1
+LEFT JOIN
+  `your_table.Qq_all` AS t2 ON t1.Qq_f2 = t2.Code
+LEFT JOIN
+  `your_table.Qq_books` AS t3 ON t1.Book_num = t3.Book_num
+LEFT JOIN
+  `your_table.10_pt_qa` AS t4 ON t1.Qa_pre_brdg = t4.QA_num
