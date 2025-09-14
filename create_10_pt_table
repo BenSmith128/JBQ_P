@@ -20,6 +20,6 @@ FROM
 LEFT JOIN
   `your_table.Qq_all` AS t2 ON t1.Qq_f2 = t2.Code
 LEFT JOIN
-  `your_table.Qq_books` AS t3 ON t1.Book_num = t3.Book_num
+  `your_table.Qq_books` AS t3 ON t1.Ans_book = t3.Book_num
 LEFT JOIN
   `your_table.10_pt_qa` AS t4 ON t1.Qa_pre_brdg = t4.QA_num
