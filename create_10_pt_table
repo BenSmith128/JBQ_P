@@ -16,10 +16,10 @@ SELECT
   t1.Answer,
   t1.Ans_wc
 FROM
-  `your_table.10_pt_key` AS t1
+  `your_table` AS t1  --point value key                              
 LEFT JOIN
-  `your_table.Qq_all` AS t2 ON t1.Qq_f2 = t2.Code
+  `your_table` AS t2 ON t1.Qq_f2 = t2.Code    --Qq_all
 LEFT JOIN
-  `your_table.Qq_books` AS t3 ON t1.Ans_book = t3.Book_num
+  `your_table` AS t3 ON t1.Ans_book = t3.Book_num    --Qq_books
 LEFT JOIN
-  `your_table.10_pt_qa` AS t4 ON t1.Qa_pre_brdg = t4.QA_num
+  `your_table` AS t4 ON t1.Qa_pre_brdg = t4.QA_num    --Qa_all
