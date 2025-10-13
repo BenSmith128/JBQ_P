@@ -1,0 +1,41 @@
+# List questions in an easily usable format
+
+WITH tep AS (
+  SELECT
+    Book_num,
+    Qq_wc,
+    Qa_pre_brdg,
+    QA_wrd_count,
+    Qi_qab_wc,
+    Ans_wc,
+    Qq_f2,
+    Q_asked,
+    Qa_bridge,
+    Qi,
+    Book_name,
+    Ans_ch,
+    Ans_fvs,
+    Answer
+  FROM `your_table` --point value SQL created table
+)
+
+SELECT
+  Book_num,
+  (COALESCE(Qq_wc, 0) + COALESCE(Qa_wrd_count, 0) + 1) AS Qa_wc,
+  (Qi_qab_wc - 1) AS Qi_wc,
+  Ans_wc,
+  COALESCE(Qa_pre_brdg, 0) AS QA_pb,
+  CONCAT(IFNULL(Qq_f2, ''), ' ', IFNULL(Q_asked, ''), ' ', Qa_bridge) AS Ques_ask,
+  Qi AS Ques_int,
+  CASE
+    WHEN Book_name IS NOT NULL AND Ans_ch IS NOT NULL AND Ans_fvs IS NOT NULL THEN
+      CONCAT(Book_name, ' ', Ans_ch, ':', Ans_fvs, ' ')
+    ELSE
+      ''
+    END
+      || Answer AS Answ
+FROM tep
+WHERE
+  Book_num <= 216 AND  --last question in match
+  Book_num >= 73    --first question in match
+ORDER BY QA_pb ASC, Ques_ask ASC;
