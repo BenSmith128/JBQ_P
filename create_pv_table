@@ -1,4 +1,4 @@
-CREATE TABLE `your_table.10_pts` AS
+CREATE TABLE `your_table.?0_pts` AS  --10_, 20_, or 30_pts
 SELECT
   t1.Book_num,
   t2.Qq_f2,
