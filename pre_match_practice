@@ -15,8 +15,9 @@ WITH tep AS (
     Book_name,
     Ans_ch,
     Ans_fvs,
+    Ans_Lvs,
     Answer
-  FROM `your_table` --point value SQL created table
+  FROM `Royal_Rangers.20_pts` --point value SQL created table
 )
 
 SELECT
@@ -29,13 +30,22 @@ SELECT
   Qi AS Ques_int,
   CASE
     WHEN Book_name IS NOT NULL AND Ans_ch IS NOT NULL AND Ans_fvs IS NOT NULL THEN
-      CONCAT(Book_name, ' ', Ans_ch, ':', Ans_fvs, ' ')
-    ELSE
-      ''
-    END
-      || Answer AS Answ
+      CONCAT(
+        Book_name, ' ', 
+        Ans_ch, ':', 
+        Ans_fvs,
+        CASE
+          WHEN Ans_Lvs IS NOT NULL
+          THEN CONCAT('-', CAST(Ans_Lvs AS STRING))
+          ELSE '' 
+        END,
+        ' '
+      )
+    ELSE ''
+  END 
+  || Answer AS Answ
 FROM tep
 WHERE
-  Book_num <= 216 AND  --last question in match
+  Book_num <= 300 AND  --last question in match
   Book_num >= 73    --first question in match
 ORDER BY QA_pb ASC, Ques_ask ASC;
