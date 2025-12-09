@@ -17,7 +17,7 @@ WITH tep AS (
     Ans_fvs,
     Ans_Lvs,
     Answer
-  FROM `Royal_Rangers.20_pts` --point value SQL created table
+  FROM `?_pts` --point value SQL created table
 )
 
 SELECT
