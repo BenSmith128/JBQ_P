@@ -15,7 +15,7 @@ WITH tep AS (
     Book_name,
     Ans_ch,
     Ans_fvs,
-    Ans_Lvs,
+    Ans_Lvs, --delete for 10_points
     Answer
   FROM `?_pts` --point value SQL created table
 )
@@ -34,6 +34,7 @@ SELECT
         Book_name, ' ', 
         Ans_ch, ':', 
         Ans_fvs,
+        -- delete this CASE for 10_points
         CASE
           WHEN Ans_Lvs IS NOT NULL
           THEN CONCAT('-', CAST(Ans_Lvs AS STRING))
@@ -48,4 +49,4 @@ FROM tep
 WHERE
   Book_num <= 300 AND  --last question in match
   Book_num >= 73    --first question in match
-ORDER BY QA_pb ASC, Ques_ask ASC;
+ORDER BY Qa_wc ASC, Ques_ask ASC;
