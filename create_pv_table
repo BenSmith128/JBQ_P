@@ -13,7 +13,7 @@ SELECT
   t3.Book_name,
   t1.Ans_ch,
   t1.Ans_fvs,
-  t1.Ans_Lvs,
+  t1.Ans_Lvs, -- not in 10_pt_key
   t1.Answer,
   t1.Ans_wc
 FROM
