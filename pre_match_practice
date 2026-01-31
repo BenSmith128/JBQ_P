@@ -10,7 +10,8 @@ WITH tep AS (
     Ans_wc,
     Qq_f2,
     Q_asked,
-    Qa_bridge,
+    Qa_b,
+    Qi_b,
     Qi,
     Book_name,
     Ans_ch,
@@ -26,8 +27,8 @@ SELECT
   (Qi_qab_wc - 1) AS Qi_wc,
   Ans_wc,
   COALESCE(Qa_pre_brdg, 0) AS QA_pb,
-  CONCAT(IFNULL(Qq_f2, ''), ' ', IFNULL(Q_asked, ''), ' ', Qa_bridge) AS Ques_ask,
-  Qi AS Ques_int,
+  CONCAT(IFNULL(Qq_f2, ''), ' ', IFNULL(Q_asked, ''), ' ', Qa_b) AS Ques_ask,
+  CONCAT(Qi_b, ' ', Qi) AS Ques_int,
   CASE
     WHEN Book_name IS NOT NULL AND Ans_ch IS NOT NULL AND Ans_fvs IS NOT NULL THEN
       CONCAT(
