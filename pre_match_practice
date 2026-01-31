@@ -16,7 +16,9 @@ WITH tep AS (
     Book_name,
     Ans_ch,
     Ans_fvs,
-    Ans_Lvs, --delete for 10_points
+    --delete for 10_points
+    Ans_Lvs,
+    --delete for 10_points
     Answer
   FROM `?_pts` --point value SQL created table
 )
@@ -37,6 +39,7 @@ SELECT
           THEN CONCAT('-', CAST(Ans_Lvs AS STRING))
           ELSE '' 
         END,
+        -- delete this CASE for 10_points
         ' '
       )
     ELSE ''
