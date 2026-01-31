@@ -23,12 +23,8 @@ WITH tep AS (
 
 SELECT
   Book_num,
-  (COALESCE(Qq_wc, 0) + COALESCE(Qa_wrd_count, 0) + 1) AS Qa_wc,
-  (Qi_qab_wc - 1) AS Qi_wc,
-  Ans_wc,
-  COALESCE(Qa_pre_brdg, 0) AS QA_pb,
   CONCAT(IFNULL(Qq_f2, ''), ' ', IFNULL(Q_asked, ''), ' ', Qa_b) AS Ques_ask,
-  CONCAT(Qi_b, ' ', Qi) AS Ques_int,
+  CONCAT(IFNULL(Qi_b, ''), ' ', IFNULL(Qi, '')) AS Ques_int,
   CASE
     WHEN Book_name IS NOT NULL AND Ans_ch IS NOT NULL AND Ans_fvs IS NOT NULL THEN
       CONCAT(
@@ -45,9 +41,14 @@ SELECT
       )
     ELSE ''
   END 
-  || Answer AS Answ
+  || Answer AS Answ,
+  Qq_wc,
+  (COALESCE(Qq_wc, 0) + COALESCE(Qa_wrd_count, 0) + 1) AS Qa_wc,
+  (Qi_qab_wc - 1) AS Qi_wc,
+  Ans_wc,
+  COALESCE(Qa_pre_brdg, 0) AS QA_pb
 FROM tep
 WHERE
   Book_num <= 300 AND  --last question in match
   Book_num >= 73    --first question in match
-ORDER BY Qa_wc ASC, Ques_ask ASC;
+ORDER BY Qq_wc ASC, Qa_wc ASC, Ques_ask ASC;
